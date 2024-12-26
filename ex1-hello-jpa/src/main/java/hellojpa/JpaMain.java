@@ -15,57 +15,15 @@ public class JpaMain {
 
         try {
 
-            /***
-             * 전체 회원 조회
-             */
-//            List<Member> result = em.createQuery("select m from Member as m", Member.class)
-//                    .getResultList();
-//
-//            for (Member member : result) {
-//                System.out.println("member.name = " + member.getName());
-//            }
-            /*insert
-//            Member member = new Member();
-//            member.setId(2L);
-//            member.setName("HelloB");
-//
-//            em.persist(member);
-//            tx.commit();
+            Member findMember1 = em.find(Member.class, 101L);
+            Member findMember2 = em.find(Member.class, 101L);
+            System.out.println("findMember1 == findMember2 => " + (findMember2 == findMember1));
 
-            //update
-            Member findMember = em.find(Member.class, 1L);
-            findMember.setName("HelloJPA");
+            Member member1 = new Member(150L, "A");
+            Member member2 = new Member(160L, "B");
 
-            //select
-            System.out.println("findMember.id = " + findMember.getId());
-            System.out.println("findMember.name = " + findMember.getName());
-
-
-            //delete
-//            em.remove(findMember);
-
-            tx.commit();
-             */
-
-            /***
-             *  엔티티 생명주기
-             */
-
-            //비영속
-            Member member = new Member();
-            member.setId(101L);
-            member.setName("HelloJPA");
-
-            //영속
-            System.out.println("=== BEFORE ===");
-            em.persist(member);
-//            em.detach(member); // 영속성 컨텍스트에서 분리, 준영속 상태
-            System.out.println("=== AFTER ===");
-
-            Member findMember = em.find(Member.class, 101L);
-            System.out.println("findMember id => " + findMember.getId());
-            System.out.println("findMember name => " + findMember.getName());
-
+            em.persist(member1);
+            em.persist(member2);
 
             tx.commit();
         } catch (Exception e) {

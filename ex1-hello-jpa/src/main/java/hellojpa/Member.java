@@ -15,6 +15,17 @@ public class Member {
     //@Column(name = "username") 컬럼이 다를때사용
     private String name;
 
+    public Member() {
+
+    }
+
+    public Member(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+
+
     public Long getId() {
         return id;
     }

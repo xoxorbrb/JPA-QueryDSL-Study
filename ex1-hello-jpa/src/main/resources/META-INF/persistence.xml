@@ -16,6 +16,9 @@
             <property name="hibernate.format_sql" value="true"/>
             <property name="hibernate.use_sql_comments" value="true"/>
             <property name="hibernate.jdbc.batch_size" value="10"/> <!-- 한방 쿼리 10개까지 버퍼링기능-->
+            <property name="hibernate.hbm2ddl.auto" value="create"/> <!-- 테이블, 객체 정상 매핑되었는지 확인 , create, update, create-drop, none 등이 있음 -->
+            <!-- 개발 초기 단계는 create, update 테스트 서버는 update 또는 validate, 스테이징 및 운영서버는 validate 또는 none (기능을 그냥 안쓰는게 좋음)-->
+            <!-- 운영장비에는 절대 절대 create, create-drop, update 사용하면 절대안됨 (데이터 다날라감) -->
         </properties>
     </persistence-unit>
 </persistence>

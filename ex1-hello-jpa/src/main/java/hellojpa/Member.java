@@ -1,44 +1,40 @@
 package hellojpa;
 
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Date;
 
 @Entity // 꼭 필요한 어노테이션
 //@Table(name="USER") 테이블 이름이 클래스와 다를때 설정
 public class Member {
 
-    @Id //Primary key가 뭔지 JPA에 알려주기 위한 어노테이션
+    @Id
     private Long id;
 
-    //@Column(name = "username") 컬럼이 다를때사용
-    private String name;
+    @Column(name="name") //updateable =false * 반영 x, nullable = false notnull제약조건
+    private String userName;
 
-    public Member() {
+    private Integer age;
 
-    }
+    @Enumerated(EnumType.STRING)
+    private RoleType roleType;
 
-    public Member(Long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdDate;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastModifiedDate;
+
+    @Lob // 큰 문자열
+    private String description;
+
+    @Transient // 메모리 상에서만 쓰고 싶을때
+    private int temp;
+
+
+    public Member() {}
 
 
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }

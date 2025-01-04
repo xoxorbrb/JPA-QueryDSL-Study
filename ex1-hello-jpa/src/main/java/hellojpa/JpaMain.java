@@ -15,16 +15,14 @@ public class JpaMain {
 
         try {
 
-            Member findMember1 = em.find(Member.class, 101L);
-            Member findMember2 = em.find(Member.class, 101L);
-            System.out.println("findMember1 == findMember2 => " + (findMember2 == findMember1));
+           //영속
 
-            Member member1 = new Member(150L, "A");
-            Member member2 = new Member(160L, "B");
+            Member member = new Member(200L, "member200");
 
-            em.persist(member1);
-            em.persist(member2);
+            em.persist(member);
+            em.flush();
 
+            System.out.println("==============");
             tx.commit();
         } catch (Exception e) {
             tx.rollback();

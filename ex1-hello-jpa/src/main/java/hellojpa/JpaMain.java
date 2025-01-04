@@ -14,6 +14,12 @@ public class JpaMain {
         tx.begin();
 
         try {
+            Member member = new Member();
+            member.setId(3L);
+            member.setUserName("C");
+            member.setRoleType(RoleType.USER);
+
+            em.persist(member);
 
             tx.commit();
         } catch (Exception e) {

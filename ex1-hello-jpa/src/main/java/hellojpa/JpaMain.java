@@ -14,13 +14,15 @@ public class JpaMain {
         tx.begin();
 
         try {
+            //준영속
 
-           //영속
+            Member member = em.find(Member.class, 150L);
+            member.setName("ZZZZZ"); //준영속 상태
 
-            Member member = new Member(200L, "member200");
+            em.detach(member); // 준영속
 
-            em.persist(member);
-            em.flush();
+//            em.clear(); //영속 컨텍스트 날려버리기
+
 
             System.out.println("==============");
             tx.commit();

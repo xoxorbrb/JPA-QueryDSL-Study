@@ -14,13 +14,25 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Member member = new Member();
-            member.setId(3L);
-            member.setUserName("C");
-            member.setRoleType(RoleType.USER);
+            Member member1 = new Member();
+            member1.setName("A");
 
-            em.persist(member);
+            Member member2 = new Member();
+            member2.setName("B");
 
+            Member member3 = new Member();
+            member3.setName("C");
+
+            System.out.println("==============");
+//
+            em.persist(member1); // 1, 51 세팅 ( call next value for member_seq 호출 2번)
+            em.persist(member2); // MEMORY에서 들고옴
+            em.persist(member3); // MEMORY에서 들고옴
+
+            System.out.println("member1.id === " +  member1.getId());
+            System.out.println("member2.id === " +  member2.getId());
+            System.out.println("member3.id === " +  member3.getId());
+            System.out.println("==============");
             tx.commit();
         } catch (Exception e) {
             tx.rollback();

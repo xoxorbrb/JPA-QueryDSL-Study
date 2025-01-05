@@ -8,35 +8,30 @@ import java.util.Date;
 
 @Entity // 꼭 필요한 어노테이션
 //@Table(name="USER") 테이블 이름이 클래스와 다를때 설정
+@SequenceGenerator(name ="MEMBER_SEQ_GENERATOR",
+sequenceName = "MEMBER_SEQ",
+initialValue = 1, allocationSize = 50)
 public class Member {
 
-    @Id
+    @Id //직접할당
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "MEMBER_SEQ_GENERATOR") // IDENTITY 기본 키 생성을 데이터베이스에 위임
+    /*
+     *  IDENTITY일 경우 값을 직접 insert 해야 기본키를 알 수 있기 때문에
+     *  commit에서 insert쿼리가 날라가는 게 아니라 persist 시 insert 쿼리가 날라가게 되어있음
+     *
+     *  SEQUENCE일 경우 commit 시에 날라가도록 되어있음 -> 대신 persist 시 call next value for member_seq 호출
+     *  이렇게 되면 계속 네트워크로 디비와 애플리케이션을 왔다갔다해야함 -> 성능 상 문제가 있음
+     *
+     *  ->> allocation이 50인 이유
+     *      -> 디비에 50개를 올려놓고, 메모리에서 1씩 쓰는거임
+     *         이러면 51번째가 됐을 때 다시 50개를 더 올려서 100개를 올려놓는거임
+     *         미리 올려놓고 쓰기
+     *      10000개나 이런 식으로 하면 성능적으로 좋긴 하지만 (10000번에 한번 호출되니까)
+     *      대신 웹서버를 내리거나 이럴경우 그 빈숫자들은 그대로 없어지고 10001번째부터 다시시작한다. (1 ~ 70개까지 쓰다가 다시 키면 10001 부터 시작한다는거임)
+     * */
     private Long id;
 
-    @Column(name="name") //updateable =false * 반영 x, nullable = false notnull제약조건
-    private String userName;
-
-    private Integer age;
-
-    @Enumerated(EnumType.STRING) // 기본값은 ORDINAL -> 이거는 enum의 순서를 가져옴 , STRING -> 이거는 ENUM 값을 가져옴 보통 순서를 사용하지 않음 ㄴ
-    private RoleType roleType;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdDate;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date lastModifiedDate;
-
-    private LocalDate testLocalDate; // date 형식으로 생성
-    private LocalDateTime testLocalDateTiem;  // timestamp 형식으로 생성
-    //@Temporal 어노테이션이 굳이 필요가 없음
-
-    @Lob  // 매핑하는 필드 타입이 문자면 CLOB 매핑, 나머지는 BLOB 으로 매핑됨
-    private String description;
-
-    @Transient // 메모리 상에서만 쓰고 싶을때
-    private int temp;
-
+    private String name;
 
     public Member() {}
 
@@ -48,59 +43,11 @@ public class Member {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getName() {
+        return name;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    public RoleType getRoleType() {
-        return roleType;
-    }
-
-    public void setRoleType(RoleType roleType) {
-        this.roleType = roleType;
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public Date getLastModifiedDate() {
-        return lastModifiedDate;
-    }
-
-    public void setLastModifiedDate(Date lastModifiedDate) {
-        this.lastModifiedDate = lastModifiedDate;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public int getTemp() {
-        return temp;
-    }
-
-    public void setTemp(int temp) {
-        this.temp = temp;
+    public void setName(String name) {
+        this.name = name;
     }
 }

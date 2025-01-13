@@ -1,6 +1,4 @@
 
-Q
-!src/main/java/jpa-basic/Main.java,7/3/73514c7fd491e3086d71570582ffc22c54076f89
 7
 pom.xml,4/4/442292b8a7efeabbe4cc176709b833b1792140ec
 `
@@ -23,3 +21,6 @@ Q.idea/sonarlint/securityhotspotstore/4/4/442292b8a7efeabbe4cc176709b833b1792140
 Q.idea/sonarlint/securityhotspotstore/7/3/73514c7fd491e3086d71570582ffc22c54076f89,9/3/93c097fa3cf54315ae86a20e434b0266d37338b6
 w
 G.idea/sonarlint/issuestore/7/3/73514c7fd491e3086d71570582ffc22c54076f89,d/7/d7d620d91f662652905fae660cf31f91efc9e0b5
+:
+
+.gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302

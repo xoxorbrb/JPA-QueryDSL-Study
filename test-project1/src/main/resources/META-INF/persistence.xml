@@ -6,7 +6,7 @@
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
             <property name="javax.persistence.jdbc.user" value="sa"/>
             <property name="javax.persistence.jdbc.password" value=""/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/test"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/jpashop"/>
 
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
             <!-- 이건 JPA한테 알려주는 역할, H2 쓸거다. 왜? Mysql, oracle 등 데이터베이스마다 함수가 다른경우가 있어서. ex) 가변문자, 문자열을 자르는 함수, 페이징 처리 등) -->

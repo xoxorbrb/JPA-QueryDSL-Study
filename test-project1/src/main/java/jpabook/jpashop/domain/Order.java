@@ -12,8 +12,7 @@ public class Order {
     @Column(name="order_id")
     private Long id;
 
-    @Column(name="member_id")
-    private Long memberId;
+    private Member member;
     private LocalDateTime orderDate;
 
     @Enumerated(EnumType.STRING)
@@ -21,6 +20,10 @@ public class Order {
 
 
     public Order() {}
+
+    public Member getMember() {
+        return member;
+    }
 
     public Long getId() {
         return id;
